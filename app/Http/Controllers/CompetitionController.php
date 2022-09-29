@@ -15,16 +15,7 @@ class CompetitionController extends Controller
      */
     public function index()
     {
-        $end = '/v4/competitions/';
-        $token = '40714b16aadf4656956491e1f6b6fd86';
-
-        $response = Http::withToken($token)->get('http://api.football-data.org'. $end);
-        $object = $response->body();
-        // if($response->successful()){
-        //     $object = respon
-        // }
-
-        return Inertia::render('pages.competition.index', compact('object'));
+        return Inertia::render('pages.competition.index');
     }
 
     /**
