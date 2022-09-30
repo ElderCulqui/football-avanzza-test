@@ -73,7 +73,10 @@ class TeamController extends Controller
      */
     public function show($id)
     {
-        //
+        // return Team::with(['players'])->find($id);
+        return Inertia::render('pages.team.show', [
+            'team' => Team::with(['players'])->find($id)
+        ]);
     }
 
     /**

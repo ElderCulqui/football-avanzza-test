@@ -4,6 +4,7 @@ import { resolvePageComponent } from 'vite-plugin-laravel/inertia'
 import { ZiggyVue } from 'ziggy-vue';
 import route from 'ziggy';
 import Layout from './Layout'
+import 'notyf/notyf.min.css';
 
 createInertiaApp({
     // resolve: async(name) => {

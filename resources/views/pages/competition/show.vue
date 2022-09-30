@@ -4,15 +4,17 @@
       </div>
     <!-- {{ competition.teams }} -->
     <div class="grid grid-cols-3 gap-4 mt-3 mb-3 ml-2 mr-2">
-        <div class="block max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow-md hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
-            <template v-if="competition">
-                <img class="rounded-t-lg" :src="competition.emblem" alt="" />
-                <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">Información</h5>
-                <p class="font-normal text-gray-700 dark:text-gray-400">ID: {{ competition.id }}</p>
-                <p class="font-normal text-gray-700 dark:text-gray-400">Nombre: {{ competition.name }}</p>
-                <p class="font-normal text-gray-700 dark:text-gray-400">Código: {{ competition.code }}</p>
-                <p class="font-normal text-gray-700 dark:text-gray-400">Tipo: {{ competition.type }}</p>
-            </template>
+        <div>
+            <div class="block max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow-md hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
+                <template v-if="competition">
+                    <img class="rounded-t-lg" :src="competition.emblem" alt="" />
+                    <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">Información</h5>
+                    <p class="font-normal text-gray-700 dark:text-gray-400">ID: {{ competition.id }}</p>
+                    <p class="font-normal text-gray-700 dark:text-gray-400">Nombre: {{ competition.name }}</p>
+                    <p class="font-normal text-gray-700 dark:text-gray-400">Código: {{ competition.code }}</p>
+                    <p class="font-normal text-gray-700 dark:text-gray-400">Tipo: {{ competition.type }}</p>
+                </template>
+            </div>
         </div>
         <table class="w-full col-span-2 text-sm text-left text-gray-500 dark:text-gray-400">
             <caption class="p-5 text-lg font-semibold text-left text-gray-900 bg-white dark:text-white dark:bg-gray-800">
@@ -59,6 +61,7 @@
 <script>
 import Layout from '../../layouts/default.vue'
 import axios from 'axios'
+import { Notyf } from 'notyf';
 import { Inertia } from '@inertiajs/inertia'
 
 export default {
@@ -98,6 +101,9 @@ export default {
                 team_id : id
             }
             Inertia.post(route('team.store', form));
+
+            const notyf = new Notyf();
+            notyf.success('¡Datos almacendos! Dirígase a la secciones de Equipos para visualizarlos');
         }
     }
 }
