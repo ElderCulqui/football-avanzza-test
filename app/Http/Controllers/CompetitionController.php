@@ -23,9 +23,9 @@ class CompetitionController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request)
     {
-        return Inertia::render('pages.competition.show');
+        //
     }
 
     /**
@@ -47,7 +47,10 @@ class CompetitionController extends Controller
      */
     public function show($id)
     {
-        //
+        // dd($id);
+        return Inertia::render('pages.competition.show', [
+            'competition_id' => $id
+        ]);
     }
 
     /**

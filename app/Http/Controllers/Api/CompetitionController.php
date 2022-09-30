@@ -12,18 +12,24 @@ class CompetitionController extends Controller
     public function index()
     {
         $end = '/v4/competitions/';
-        $token = '40714b16aadf4656956491e1f6b6fd86';
+        $response = Http::withHeaders([ 'X-Auth-Token' => env('FOOTBALL_TOKEN') ])->get('http://api.football-data.org'. $end);
 
-        $response = Http::withHeaders([ 'X-Auth-Token' => $token ])->get('http://api.football-data.org'. $end);
-
-        // return $response;
         return response()->json([
             'data' => json_decode($response->body())->competitions ?? [],
             'message' => $response['message'] ?? null,
             'errorCode' => $response['errorCode'] ?? null
         ], $response['errorCode'] ?? 200);
+    }
 
-        // return json_decode($response->body())->competitions;
-        // return $response->body()->competitions;
+    public function show($id)
+    {
+        $end = "/v4/competitions/{$id}/teams";
+        $response = Http::withHeaders([ 'X-Auth-Token' => env('FOOTBALL_TOKEN') ])->get('http://api.football-data.org'. $end);
+        // return $response->body();
+        return response()->json([
+            'data' => json_decode($response->body()) ?? [],
+            'message' => $response['message'] ?? null,
+            'errorCode' => $response['errorCode'] ?? null
+        ], $response['errorCode'] ?? 200);
     }
 }

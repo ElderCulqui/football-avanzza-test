@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Player;
+use App\Models\Team;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Http;
 use Inertia\Inertia;
 
 class TeamController extends Controller
@@ -14,7 +17,9 @@ class TeamController extends Controller
      */
     public function index()
     {
-        return Inertia::render('pages.team.index');
+        return Inertia::render('pages.team.index', [
+            'teams' => Team::get()
+        ]);
     }
 
     /**
@@ -35,7 +40,29 @@ class TeamController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $team_id = $request['team_id'];
+
+        $end = "/v4/teams/{$team_id}";
+        $response = Http::withHeaders([ 'X-Auth-Token' => env('FOOTBALL_TOKEN') ])->get('http://api.football-data.org'. $end);
+
+        if ($response->successful()) {
+            $team = Team::firstOrCreate([
+                        'code' => $response['id'],
+                    ], [
+                        'name' => $response['name'],
+                        'country' => $response['area']['name'],
+                    ]);
+
+            foreach ($response['squad'] as $value) {
+                Player::firstOrCreate([
+                    'code' => $value['id'],
+                ], [
+                    'team_id' => $team->id,
+                    'name' => $value['name'],
+                    'position' => $value['position']
+                ]);
+            }
+        }
     }
 
     /**

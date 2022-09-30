@@ -21,4 +21,5 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 Route::controller(CompetitionController::class)->group(function () {
     Route::get('/competitions', 'index');
+    Route::get('/competitions/{id}/teams/', 'show');
 });

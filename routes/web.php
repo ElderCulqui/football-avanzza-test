@@ -20,5 +20,5 @@ Route::get('/', function () {
 });
 
 Route::resource('/competition', Controllers\CompetitionController::class)->only('index', 'show');
-Route::resource('/team', Controllers\TeamController::class)->only('index', 'show');
+Route::resource('/team', Controllers\TeamController::class)->only('index', 'show', 'store');
 // Route::resource('/player', CompetitionController::class)->only('index');
