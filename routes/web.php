@@ -16,7 +16,7 @@ use App\Http\Controllers;
 */
 
 Route::get('/', function () {
-    return inertia('welcome');
+    return inertia('competition.index');
 });
 
 Route::resource('/competition', Controllers\CompetitionController::class)->only('index', 'show');
