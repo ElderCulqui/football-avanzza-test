@@ -2,7 +2,7 @@
 Prueba Técnica para Avanzza
 La siguiente aplicación web, se desarrolló con Lavaral 9, VueJS 3, InertiaJS, TailwindCss.
 
-Para el consumo de la Api Externa (football-data.org) se utilizó la librería Http Client. Se realizaron validaciones para que al superar las 10 peticiones en un minuto la aplicación muestre un mensaje descriptivo del error. 
+Para el consumo de la Api Externa (football-data.org) se utilizó la librería Http Client. Se realizaron validaciones para que al superar las 10 peticiones en un minuto la aplicación muestre un mensaje descriptivo del error. Además se separaron las rutas que hacen las peticions a la Api Externa en el archivo api.php de las rutas para la Api Interna en el archivo web.php.
 
 Se utilizó como base de datos el gestor Mysql, en el cual se almacenan los registros de Equipos y Jugadores, estos se registran cuando hacemos click en el botón de descargar en el Show de una Liga.
 
